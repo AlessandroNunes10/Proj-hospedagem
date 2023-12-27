@@ -44,12 +44,6 @@ public class HospedeController {
         return ResponseEntity.ok(hospede);
     }
 
-    // @GetMapping
-    // public ResponseEntity<Page<Hospede>> listar(@PageableDefault(size = 30, sort = { "nome" }) Pageable paginacao) {
-    //     var hospedes = repository.findAll(paginacao);
-    //     return ResponseEntity.ok(hospedes);
-    // }
-
     @GetMapping
     public List<Hospede> getHospedes() {
         return repository.findAll();
