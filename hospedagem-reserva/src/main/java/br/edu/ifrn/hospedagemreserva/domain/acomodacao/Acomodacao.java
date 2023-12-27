@@ -1,5 +1,7 @@
 package br.edu.ifrn.hospedagemreserva.domain.acomodacao;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.edu.ifrn.hospedagemreserva.domain.anfitriao.Anfitriao;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,8 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,25 +25,19 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = "id")
 public class Acomodacao {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "Nome da acomodação obrigatório")
+    @Column(name = "nome")
     private String nome;
-
-    @NotNull
+    @Column(name = "localizacao")
     private String localizacao;
-
     @Column(name = "numero_registro")
-    private String numeroRegistro;
-    
+    private int numero_registro;
     @Column(name = "quartos_disponiveis")
-    private int quartosDisponiveis;
-
-    @NotNull
+    private int quartos_disponiveis;
     @ManyToOne
-    @JoinColumn(name = "anfitriao_id") // Chave estrangeira
+    @JoinColumn(name = "anfitriao_id")
+    @JsonBackReference
     private Anfitriao anfitriao;
 }

@@ -1,8 +1,14 @@
 package br.edu.ifrn.hospedagemreserva.domain.anfitriao;
 
-import br.edu.ifrn.hospedagemreserva.domain.acomodacao.Acomodacao;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,26 +17,27 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity(name = "anfitriao")
-@Table(name = "anfitriao")
-@NoArgsConstructor
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.edu.ifrn.hospedagemreserva.domain.acomodacao.Acomodacao;
+
+@Entity(name = "anfitriao")    //JPQL
+@Table(name = "anfitriao")     //SQL
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
 public class Anfitriao {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
+    @NotBlank(message = "Nome do anfitrião é obrigatório")
+    @Column(name = "nome")
     private String nome;
-
-    @NotNull
+    @Column(name = "nacionalidade")
     private String nacionalidade;
-
-    @OneToMany(mappedBy = "anfitriao")
+    @OneToMany(mappedBy = "anfitriao", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Acomodacao> acomodacoes;
-
 }

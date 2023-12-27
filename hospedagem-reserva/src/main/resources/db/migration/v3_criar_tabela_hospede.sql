@@ -1,4 +1,4 @@
-CREATE TABLE Hospede (
+CREATE TABLE hospede (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     data_registro DATE NOT NULL

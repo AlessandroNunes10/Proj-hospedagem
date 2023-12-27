@@ -1,16 +1,24 @@
 package br.edu.ifrn.hospedagemreserva.domain.reserva;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.edu.ifrn.hospedagemreserva.domain.acomodacao.Acomodacao;
 import br.edu.ifrn.hospedagemreserva.domain.hospede.Hospede;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @Entity(name = "reserva")
 @Table(name = "reserva")
@@ -24,20 +32,15 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "data_inicio")
-    private LocalDate dataInicio;
-
+    private LocalDateTime data_inicio;
     @Column(name = "data_fim")
-    private LocalDate dataFim;
-
-    @NotNull
+    private LocalDateTime data_fim;
     @ManyToOne
     @JoinColumn(name = "acomodacao_id")
     private Acomodacao acomodacao;
-
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "hospede_id")
+    @JsonBackReference
     private Hospede hospede;
 }

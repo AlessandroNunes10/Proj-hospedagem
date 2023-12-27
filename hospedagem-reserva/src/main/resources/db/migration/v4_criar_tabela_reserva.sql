@@ -1,9 +1,9 @@
-CREATE TABLE Reserva (
+CREATE TABLE reserva (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    data_inicio DATE NOT NULL,
-    data_fim DATE NOT NULL,
+    data_inicio DATETIME NOT NULL,
+    data_fim DATETIME NOT NULL,
     acomodacao_id INT,
     hospede_id INT,
-    FOREIGN KEY (acomodacao_id) REFERENCES Acomodacao(id),
-    FOREIGN KEY (hospede_id) REFERENCES Hospede(id)
+    FOREIGN KEY (acomodacao_id) REFERENCES acomodacao(id),
+    FOREIGN KEY (hospede_id) REFERENCES hospede(id)
 );
