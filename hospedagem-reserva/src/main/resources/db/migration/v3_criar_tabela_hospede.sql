@@ -1,0 +1,5 @@
+CREATE TABLE Hospede (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_registro DATE NOT NULL
+);
